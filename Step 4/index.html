@@ -12,6 +12,7 @@
     <script src="js/underscore-min.js"></script>	
     <script src="js/postal.js"></script>	
     <script src="js/newPostControl.js"></script>	
+    <script src="js/jquery.colorbox.js"></script>	
   </head>
   <body>
 	<div class="navbar  over-white">
@@ -30,11 +31,7 @@
 	
 	<div id="newUpdate" class="container">
 		<a href="#"><i class="icon-comment"></i> New Update</a>
-	</div>
-	
-	<div id="scratchingPost" class="container">
-		TODO Scratching Post
-	</div>
+	</div>	
 	
 	<div class="container">
 		<div id="newPost" class="span8">
@@ -84,10 +81,18 @@
 		</div>
 	</div>
 	
+	<div id="scratchingPost" class="container">
+		TODO Scratching Post
+	</div>
+	
+	
 	<script type="text/javascript">
 		$(function() {
 			window.newPostControl = new newPostControl("newPost");
 
+			$('#newUpdate a').on('click', function(){
+				$('#newPost').show();
+			});
 		})
 	</script>
 	

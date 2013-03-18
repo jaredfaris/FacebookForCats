@@ -75,6 +75,9 @@ function newPostControl(formContainerId){
 		// reset the form
 		this.title("");
 		this.selectedImage(null);
+		
+		// hide the form
+		self.$formContainer.hide();
 	}
 	
 
