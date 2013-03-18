@@ -41,15 +41,20 @@
 						<div class="control-group post-title-container">
 							<label class="control-label" for="postTitle">Title</label>
 							<div class="controls">
+								<!-- we'll tie the value of this input to Knockout and wire up a keypress event -->
 								<input type="text" id="postTitle" placeholder="Title" data-bind="value: title, valueUpdate: 'afterkeydown'">
 							</div>
 						</div>
 						
 						<div class="control-group possible-images">
 							<label class="control-label" for="postContent">Content</label>
+							<!-- write out an li for each image in the images array -->
 							<ul class="thumbnails" data-bind="foreach: images">
+								<!-- add whatever class this image should have. will be either 'selected' or '' -->
 								<li class="span1" data-bind="css: selectedClass()">
+									<!-- when this is clicked call the selectImage function -->
 									<a href="#" class="thumbnail" data-bind="click: selectImage">
+										<!-- our image src and alt tags will be based on view model data -->
 										<img data-bind="attr: { src: src, alt: text}">
 									</a>
 								</li>
@@ -57,8 +62,10 @@
 						</div>
 
 						<div class="preview">
+							<!-- listen to the displayTitle function to get our text. magic will cause this to trigger when title is updated -->
 							<h1 data-bind="text: displayTitle()"></h1>
 							<div>
+								<!-- get the src from the selected property. again by magic -->
 								<img data-bind="attr: {src: displayImage()}">
 							</div>
 						</div>
