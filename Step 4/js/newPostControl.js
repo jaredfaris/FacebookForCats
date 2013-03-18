@@ -54,7 +54,7 @@ function newPostControl(formContainerId){
 	// return the title that should be displayed
 	this.viewModel.titleToDisplay = function() {
 		if (this.title() && this.title().length > 0 ){
-			return this.title;
+			return this.title();
 		} else {
 			return "Mrow?";
 		}
@@ -65,7 +65,7 @@ function newPostControl(formContainerId){
 		// capture the selected values
 		var imageSrc = this.imageSrcToDisplay();
 		var title = this.titleToDisplay();
-		
+		debugger
 		// send out a message with these values
 		self.newPostChannel.publish({
 			src: imageSrc,

@@ -93,6 +93,10 @@
 			$('#newUpdate a').on('click', function(){
 				$('#newPost').show();
 			});
+			
+			postal.channel("posts","newPost").subscribe(function(data){
+				console.log("src: " + data.src + " title: " + data.title);
+			});
 		})
 	</script>
 	
