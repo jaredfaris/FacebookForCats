@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Facebook For Cats</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/overrides.css" rel="stylesheet" media="screen">
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/knockout-2.2.1.js"></script>
+    <script src="js/underscore-min.js"></script>	
+    <script src="js/postal.js"></script>	
+    <script src="js/newPostControl.js"></script>	
+  </head>
+  <body>
+	<div class="navbar  over-white">
+		<div class="dark-blue">
+			<div class="container">
+				<a class="brand" href="#">facebook <span class="for-cats">for Cats</span></a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="hero-unit cover-photo">
+			<h1>Miss Kitty</h1>
+		</div>
+	</div>
+	
+	<div id="newUpdate" class="container">
+		<a href="#"><i class="icon-comment"></i> New Update</a>
+	</div>
+	
+	<div id="scratchingPost" class="container">
+		TODO Scratching Post
+	</div>
+	
+	<div class="container">
+		<div id="newPost" class="span8">
+			<div class="row">
+				<div class="span8">
+					<form class="form-horizontal" data-bind="submit: postUpdate">
+						<div class="control-group post-title-container">
+							<label class="control-label" for="postTitle">Title</label>
+							<div class="controls">
+								<!-- we'll tie the value of this input to Knockout and wire up a keypress event -->
+								<input type="text" id="postTitle" placeholder="Title" data-bind="value: title, valueUpdate: 'afterkeydown'">
+							</div>
+						</div>
+						
+						<div class="control-group possible-images">
+							<label class="control-label" for="postContent">Content</label>
+							<!-- write out an li for each image in the images array -->
+							<ul class="thumbnails" data-bind="foreach: images">
+								<!-- add whatever class this image should have. will be either 'selected' or '' -->
+								<li class="span1" data-bind="css: selectedClass()">
+									<!-- when this is clicked call the selectImage function -->
+									<a href="#" class="thumbnail" data-bind="click: selectImage">
+										<!-- our image src and alt tags will be based on view model data -->
+										<img data-bind="attr: { src: src, alt: text}">
+									</a>
+								</li>
+							</ul>
+						</div>
+
+						<div class="preview">
+							<!-- listen to the titleToDisplay function to get our text. magic will cause this to trigger when title is updated -->
+							<h1 data-bind="text: titleToDisplay()"></h1>
+							<div>
+								<!-- get the src from the selected property. again by magic -->
+								<img data-bind="attr: {src: imageSrcToDisplay()}">
+							</div>
+						</div>
+						
+						<div class="control-group form-controls">
+							<div class="controls">
+								<button type="submit" class="btn">Post</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		$(function() {
+			window.newPostControl = new newPostControl("newPost");
+
+		})
+	</script>
+	
+
+  </body>
+</html>
