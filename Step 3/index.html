@@ -41,7 +41,7 @@
 						<div class="control-group post-title-container">
 							<label class="control-label" for="postTitle">Title</label>
 							<div class="controls">
-								<input type="text" id="postTitle" placeholder="Title">
+								<input type="text" id="postTitle" placeholder="Title" data-bind="value: title, valueUpdate: 'afterkeydown'">
 							</div>
 						</div>
 						
@@ -86,7 +86,7 @@
 					{text: "Center of attention", src: "./img/laptop.jpg"},
 					{text: "Lame inanimate toy", src: "./img/mouse.jpg"},
 				]),
-				title: "",
+				title: ko.observable(""),
 				selectedImage: ko.observable(null)
 			}
 			
@@ -123,7 +123,7 @@
 			
 			// return the title that should be displayed
 			viewModel.displayTitle = function() {
-				if (this.title && this.title.length > 0 ){
+				if (this.title() && this.title().length > 0 ){
 					return this.title;
 				} else {
 					return "Mrow?";
