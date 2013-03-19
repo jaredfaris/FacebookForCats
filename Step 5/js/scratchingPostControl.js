@@ -13,14 +13,19 @@ function scratchingPostControl(scratchingPostContainerId){
 	
 	// define a really basic view to represent the scratching post
 	var postsView = Backbone.View.extend({
+		className: "posts-container span6",
+	
 		render: function() {
 		
 			html = [];
 			for(var i = 0; i < this.collection.length; i++) {
-				html.push("<h1>HI</h1>");
+				item = this.collection.models[i];
+				html.push("<div class=\"post span6\">");
+				html.push("<header>" + item.get('title')  + "</header>");
+				html.push("<section><img src=\"" + item.get('src') + "\"></section></div>");
 			}
 		
-			this.$el.html(html);
+			this.$el.html(html.join(''));
 		}
 	});
 	
