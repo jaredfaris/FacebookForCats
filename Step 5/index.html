@@ -10,8 +10,10 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/knockout-2.2.1.js"></script>
     <script src="js/underscore-min.js"></script>	
+    <script src="js/backbone-min.js"></script>	
     <script src="js/postal.js"></script>	
-    <script src="js/newPostControl.js"></script>	
+    <script src="js/newPostControl.js"></script>
+	<script src="js/scratchingPostControl.js"></script>
   </head>
   <body>
 	<div class="navbar  over-white">
@@ -88,6 +90,7 @@
 	<script type="text/javascript">
 		$(function() {
 			window.newPostControl = new newPostControl("newPost");
+			window.scratchingPostControl = new scratchingPostControl("scratchingPost");
 
 			$('#newUpdate a').on('click', function(){
 				$('#newPost').show();
