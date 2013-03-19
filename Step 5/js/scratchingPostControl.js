@@ -40,11 +40,13 @@ function scratchingPostControl(scratchingPostContainerId){
 	// setup a channel to listen to
 	this.newPostChannel = postal.channel("posts", "newPost");
 	this.newPostChannel.subscribe(function(data){
+		// add something to the collection
 		collection.add({
 			title: data.title,
 			src: data.src
 		});
 		
+		// and then tell the view to re-render
 		view.render();
 	});
 }
