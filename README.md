@@ -12,3 +12,7 @@ A silly set of JS examples
 [Step 4](./Step%204/index.html) - Adding Postal.js to publish messages when the form submits.
 
 [Step 5](./Step%205/index.html) - And then adding a super basic Backbone piece that interacts.
+
+[Step 6](./Step%206/index.html) - Adding an event to remove a post.
+
+[Step 7](./Step%207/index.html) - Fixing the issue where removed posts aren't really removed from the collection.
