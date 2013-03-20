@@ -8,7 +8,17 @@ function scratchingPostControl(scratchingPostContainerId){
 
 	// we'll have a collection of these
 	var postsCollection = Backbone.Collection.extend({
-		model: postModel
+		model: postModel,
+		
+		initialize: function() {
+			var self = this;
+			
+			// if something tells us to remove a model from this collection do so
+			this.listenTo(this, "posts:removePost", function(model){
+				debugger;
+				self.remove(model);
+			});
+		}
 	});
 	
 	// let's define a child view for each item
@@ -20,11 +30,11 @@ function scratchingPostControl(scratchingPostContainerId){
 		},
 		
 		deleteMe: function(){
-			// tell the world we're going to be removed
-			// kind of hacky to pass the whole object but it works
-			postal.channel("posts", "removePost").publish(this.model);
-		
-			this.remove(); // removes this rendered view
+			// trigger a remove event on the collection saying you want this post removed
+			this.model.collection.trigger("posts:removePost", this.model);
+
+			// remove this view
+			this.remove();
 		},
 		
 		render: function() {
@@ -36,19 +46,25 @@ function scratchingPostControl(scratchingPostContainerId){
 	var postsView = Backbone.View.extend({
 		className: "posts-container span6",
 		childViews: [], // a place to stash references to our children
-	
+
 		initialize: function() {
-			self = this;
+			var self = this;
 			
-			// add code to remove any deleted child views from our collection
-			postal.channel("posts", "removePost").subscribe(function(model){
-				console.log("I'm removing a model");
-				self.collection.remove(model);
-			});
+			// setup a channel to listen to
+			this.newPostChannel = postal.channel("posts", "newPost");
+			this.newPostChannel.subscribe(function(data){
+				// add something to the collection
+				self.collection.add({
+					title: data.title,
+					src: data.src
+				});
+				
+				// and then tell the view to re-render
+				self.render();
+			});			
 		},
-	
-		render: function() {
 		
+		render: function() {
 			// purge any existing views to prevent zombies
 			for(var i = 0; i < this.childViews.length; i++) {
 				childViews[i].remove();
@@ -75,17 +91,4 @@ function scratchingPostControl(scratchingPostContainerId){
 	});
 	this.$postContainer.html(view.el); // and actually put it in our document
 	view.render();
-
-	// setup a channel to listen to
-	this.newPostChannel = postal.channel("posts", "newPost");
-	this.newPostChannel.subscribe(function(data){
-		// add something to the collection
-		collection.add({
-			title: data.title,
-			src: data.src
-		});
-		
-		// and then tell the view to re-render
-		view.render();
-	});
 }
