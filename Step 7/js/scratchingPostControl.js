@@ -15,7 +15,6 @@ function scratchingPostControl(scratchingPostContainerId){
 			
 			// if something tells us to remove a model from this collection do so
 			this.listenTo(this, "posts:removePost", function(model){
-				debugger;
 				self.remove(model);
 			});
 		}
